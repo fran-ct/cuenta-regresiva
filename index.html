@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Fiesta de Fin de Año - Cuenta Regresiva</title>
-    
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
+    <!-- Incluir Flipdown.js y CSS desde CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flipdown/dist/flipdown.min.css">
+    <style>
+      /* Estilos generales */
       body {
         display: flex;
         flex-direction: column;
@@ -16,9 +17,10 @@
         align-items: center;
         height: 100vh;
         margin: 0;
-        background-color: #121212;
-        color: #00FFAB;
-        font-family: 'Orbitron', sans-serif;
+        /* Fondo con gradiente más suave y extendido */
+        background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.1) -159%, rgba(18, 18, 18, 1) 314%);
+        color: #FFD700; /* Color dorado */
+        font-family: 'Arial', sans-serif;
         text-align: center;
       }
 
@@ -29,35 +31,47 @@
         text-shadow: 0px 0px 10px rgba(255, 215, 0, 0.8);
       }
 
-      #countdown {
-        font-size: 6em;
-        box-shadow: 0px 0px 20px rgba(0, 255, 171, 0.5);
-        padding: 20px;
-        border-radius: 10px;
-        width: 600px; /* Ancho fijo */
+      .flipdown {
+        margin-top: 20px;
+      }
+
+      /* Estilo para cambiar los colores de los títulos */
+      .flipdown__heading {
+        color: #00FFAB; /* Color verde brillante */
+      }
+
+      /* Estilo para el logo */
+      #logo {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 150px; /* Ajusta el tamaño si es necesario */
       }
     </style>
   </head>
 
   <body>
     <h1>Fiesta de fin de año</h1>
-    <div id="countdown"></div>
+
+    <!-- Contenedor para Flipdown.js -->
+    <div id="flipdown" class="flipdown"></div>
+
+    <!-- Logo en la esquina superior derecha -->
+    <img id="logo" src="https://craftech.io/wp-content/uploads/2023/03/Craftech_footer.png" alt="Logo de Craftech">
+
+    <!-- Incluir la librería Flipdown.js -->
+    <script src="https://cdn.jsdelivr.net/npm/flipdown/dist/flipdown.min.js"></script>
 
     <script>
-      function updateCountdown() {
-        const eventDate = new Date('December 13, 2024 00:00:00').getTime();
-        const now = new Date().getTime();
-        const distance = eventDate - now;
+      // Fecha de la fiesta (13 de diciembre de 2024)
+      const eventDate = new Date('December 13, 2024 00:00:00').getTime() / 1000;
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        document.getElementById('countdown').innerHTML = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's ';
-      }
-
-      setInterval(updateCountdown, 1000);
+      // Inicializar Flipdown
+      new FlipDown(eventDate)
+        .start()
+        .ifEnded(() => {
+          console.log('¡La fiesta ha comenzado!');
+        });
     </script>
   </body>
 </html>
