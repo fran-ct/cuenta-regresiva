@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Fiesta de Fin de Año - Cuenta Regresiva</title>
+    
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #121212;
+        color: #00FFAB;
+        font-family: 'Orbitron', sans-serif;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 3em;
+        margin-bottom: 20px;
+        color: #FFD700; /* Color dorado */
+        text-shadow: 0px 0px 10px rgba(255, 215, 0, 0.8);
+      }
+
+      #countdown {
+        font-size: 6em;
+        box-shadow: 0px 0px 20px rgba(0, 255, 171, 0.5);
+        padding: 20px;
+        border-radius: 10px;
+        width: 600px; /* Ancho fijo */
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Fiesta de fin de año</h1>
+    <div id="countdown"></div>
+
+    <script>
+      function updateCountdown() {
+        const eventDate = new Date('December 13, 2024 00:00:00').getTime();
+        const now = new Date().getTime();
+        const distance = eventDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById('countdown').innerHTML = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's ';
+      }
+
+      setInterval(updateCountdown, 1000);
+    </script>
+  </body>
+</html>
